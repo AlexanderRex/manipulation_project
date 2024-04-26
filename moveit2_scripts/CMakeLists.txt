@@ -11,11 +11,24 @@ find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 
 # Generate the executable
-add_executable(pick_and_place
-    src/pick_and_place.cpp)
-target_include_directories(pick_and_place
+add_executable(pick_and_place_sim
+    src/pick_and_place_sim.cpp)
+target_include_directories(pick_and_place_sim
     PUBLIC include)
-ament_target_dependencies(pick_and_place
+ament_target_dependencies(pick_and_place_sim
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	moveit_ros_planning
+	)
+
+add_executable(pick_and_place_real
+    src/pick_and_place_real.cpp)
+target_include_directories(pick_and_place_real
+    PUBLIC include)
+ament_target_dependencies(pick_and_place_real
     ament_cmake
 	rclcpp
 	rclcpp_action
@@ -26,7 +39,8 @@ ament_target_dependencies(pick_and_place
 
 # Install the executable
 install(TARGETS 
-	pick_and_place
+	pick_and_place_sim
+	pick_and_place_real
     DESTINATION lib/${PROJECT_NAME}
 )
 

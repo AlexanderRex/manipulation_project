@@ -7,13 +7,13 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 
 def generate_launch_description():
-    moveit_config = MoveItConfigsBuilder("name", package_name="my_moveit_config").to_moveit_configs()
+    moveit_config = MoveItConfigsBuilder("name", package_name="real_moveit_config").to_moveit_configs()
 
     # MoveItCpp demo executable
     moveit_cpp_node = Node(
-        name="pick_and_place",
+        name="pick_and_place_real",
         package="moveit2_scripts",
-        executable="pick_and_place",
+        executable="pick_and_place_real",
         output="screen",
         parameters=[
             moveit_config.robot_description,
