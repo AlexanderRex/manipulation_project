@@ -9,6 +9,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(grasping_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
 
 # Generate the executable
 add_executable(pick_and_place_sim
@@ -37,10 +39,25 @@ ament_target_dependencies(pick_and_place_real
 	moveit_ros_planning
 	)
 
+add_executable(pick_and_place_perception_sim
+    src/pick_and_place_perception_sim.cpp)
+target_include_directories(pick_and_place_perception_sim
+    PUBLIC include)
+ament_target_dependencies(pick_and_place_perception_sim
+    ament_cmake
+	rclcpp
+	rclcpp_action
+	moveit_core
+	moveit_ros_planning_interface
+	moveit_ros_planning
+	grasping_msgs
+	)
+
 # Install the executable
 install(TARGETS 
 	pick_and_place_sim
 	pick_and_place_real
+	pick_and_place_perception_sim
     DESTINATION lib/${PROJECT_NAME}
 )
 
