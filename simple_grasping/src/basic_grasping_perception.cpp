@@ -102,7 +102,8 @@ public:
     rclcpp::QoS points_qos(10);
     points_qos.best_effort();
     cloud_sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-        "/wrist_rgbd_depth_sensor/points", points_qos,
+        "/camera/depth/color/points",
+        points_qos, // wrist_rgbd_depth_sensor/points
         std::bind(&BasicGraspingPerception::cloud_callback, this, _1));
 
     // Setup actionlib server
