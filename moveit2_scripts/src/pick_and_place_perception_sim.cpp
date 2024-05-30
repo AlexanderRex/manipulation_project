@@ -208,10 +208,10 @@ int main(int argc, char **argv) {
   target_pose1.position.y = action_client->y - 0.021036;
   target_pose1.position.z = action_client->z + 0.206675;
 
-  RCLCPP_INFO(move_group_node->get_logger(), "New target positions set: x = %f, y = %f, z = %f",
-                target_pose1.position.x,
-                target_pose1.position.y,
-                target_pose1.position.z);
+  RCLCPP_INFO(move_group_node->get_logger(),
+              "New target positions set: x = %f, y = %f, z = %f",
+              target_pose1.position.x, target_pose1.position.y,
+              target_pose1.position.z);
 
   move_group_arm.setPoseTarget(target_pose1);
 

@@ -14,7 +14,7 @@ def generate_launch_description():
 
     action_server_node = Node(
             package='simple_grasping',
-            executable='basic_grasping_perception_node',
+            executable='basic_grasping_perception_real_node',
             name='basic_grasping_perception',
             parameters=[{'debug_topics': True}],
             output='screen',

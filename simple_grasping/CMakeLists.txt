@@ -45,15 +45,26 @@ add_library(simple_grasping SHARED
 ament_target_dependencies(simple_grasping ${common_depends})
 target_link_libraries(simple_grasping ${PCL_LIBRARIES})
 
-### Build basic_grasping_perception
-add_library(basic_grasping_perception SHARED
-  src/basic_grasping_perception.cpp
+### Build basic_grasping_perception_real
+add_library(basic_grasping_perception_real SHARED
+  src/basic_grasping_perception_real.cpp
 )
-ament_target_dependencies(basic_grasping_perception ${common_depends})
-target_link_libraries(basic_grasping_perception simple_grasping ${PCL_LIBRARIES})
-rclcpp_components_register_node(basic_grasping_perception
+ament_target_dependencies(basic_grasping_perception_real ${common_depends})
+target_link_libraries(basic_grasping_perception_real simple_grasping ${PCL_LIBRARIES})
+rclcpp_components_register_node(basic_grasping_perception_real
   PLUGIN "simple_grasping::BasicGraspingPerception"
-  EXECUTABLE basic_grasping_perception_node
+  EXECUTABLE basic_grasping_perception_real_node
+)
+
+### Build basic_grasping_perception_sim
+add_library(basic_grasping_perception_sim SHARED
+  src/basic_grasping_perception_sim.cpp
+)
+ament_target_dependencies(basic_grasping_perception_sim ${common_depends})
+target_link_libraries(basic_grasping_perception_sim simple_grasping ${PCL_LIBRARIES})
+rclcpp_components_register_node(basic_grasping_perception_sim
+  PLUGIN "simple_grasping::BasicGraspingPerception"
+  EXECUTABLE basic_grasping_perception_sim_node
 )
 
 ### Build grasp_planner_node
@@ -95,7 +106,8 @@ install(
 install(
   TARGETS
     simple_grasping
-    basic_grasping_perception
+    basic_grasping_perception_real
+	basic_grasping_perception_sim
     grasp_planner
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
